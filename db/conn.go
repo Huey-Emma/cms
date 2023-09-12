@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	_ "embed"
-	"fmt"
 	"time"
 
 	"github.com/lib/pq"
@@ -40,6 +39,9 @@ func (db *Database) PingContext(ctx context.Context) error {
 var schema string
 
 func (db *Database) MigrateDb() error {
-	fmt.Print(schema)
+	if _, err := db.DB.Exec(schema); err != nil {
+		return err
+	}
+
 	return nil
 }
