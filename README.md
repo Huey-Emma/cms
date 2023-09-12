@@ -13,8 +13,7 @@ CMS is a platform that enables users perform CRUD - Create, Read, Update, Delete
 -   Users can delete stored information
 
 ### Installation Guide
-
--   Clone the repository [here](https://www.github.com/Huey-Emma/)
+-   Clone the repository [here](https://github.com/Huey-Emma/cms.git)
 -   The develop branch is the most stable branch at any given time. Ensure you are working from it
 
 -   Run `go mod download` to install all dependencies
