@@ -2,7 +2,7 @@
 
 # Project Support
 
-###Introduction
+### Introduction
 CMS is a platform that enables users perform CRUD - Create, Read, Update, Delete - operations on their personal information which includes name as well as other details deemed as important
 
 ### Project Support Features
