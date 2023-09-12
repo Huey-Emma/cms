@@ -94,7 +94,7 @@ func (router *Router) recoverPanic(n http.Handler) http.Handler {
 
 func (router *Router) logRequests(n http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		router.logger.PrintInfo(r.Method, lib.Map[string]{"path": r.RequestURI})
+		router.logger.PrintInfo(fmt.Sprintf("%s %s", r.Method, r.RequestURI), nil)
 		n.ServeHTTP(w, r)
 	})
 }

@@ -51,10 +51,16 @@ func (h *Handler) InsertPerson(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	name, ok := input["name"]
-	if !ok || len(strings.TrimSpace(name)) == 0 {
-		lib.WriteError(w, 422, fmt.Errorf("name cannot be blank"))
+	if len(input) == 0 {
+		lib.WriteError(w, 422, fmt.Errorf("no content"))
 		return
+	}
+
+	for k, v := range input {
+		if len(strings.TrimSpace(v)) == 0 {
+			lib.WriteError(w, 422, fmt.Errorf("%s cannot be blank", k))
+			return
+		}
 	}
 
 	person, err := h.service.InsertPerson(r.Context(), input)
@@ -117,12 +123,17 @@ func (h *Handler) UpdatePerson(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if name := input["name"]; len(strings.TrimSpace(name)) == 0 {
-		lib.WriteError(w, 422, fmt.Errorf("name cannot be blank"))
+	if len(input) == 0 {
+		lib.WriteError(w, 422, fmt.Errorf("no content"))
 		return
 	}
 
 	for k, v := range input {
+		if len(strings.TrimSpace(v)) == 0 {
+			lib.WriteError(w, 422, fmt.Errorf("%s cannot be blank", k))
+			return
+		}
+
 		person[k] = v
 	}
 

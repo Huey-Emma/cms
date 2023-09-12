@@ -92,11 +92,16 @@ func (r *repository) FindPerson(ctx context.Context, id int) (lib.Map[any], erro
 
 func (r *repository) UpdatePerson(ctx context.Context, person lib.Map[any]) error {
 	q := `UPDATE persons SET info = $1 WHERE id = $2;`
-
 	id := person["id"]
-	delete(person, "id")
+	payload := make(map[string]any)
 
-	info, err := json.Marshal(person)
+	for k, v := range person {
+		if k != "id" {
+			payload[k] = v
+		}
+	}
+
+	info, err := json.Marshal(payload)
 	if err != nil {
 		return err
 	}
