@@ -24,10 +24,7 @@ type config struct {
 
 func main() {
 	logger := jsonlog.New(os.Stdout, jsonlog.LevelInfo)
-
-	if err := godotenv.Load(); err != nil {
-		logger.PrintFatal(err, nil)
-	}
+	godotenv.Load()
 
 	conf := config{}
 
