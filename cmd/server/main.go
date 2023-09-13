@@ -5,8 +5,6 @@ import (
 	"flag"
 	"os"
 
-	"github.com/joho/godotenv"
-
 	"github.com/huey-emma/cms/db"
 	"github.com/huey-emma/cms/internal/router"
 	"github.com/huey-emma/cms/internal/utils/jsonlog"
@@ -24,7 +22,6 @@ type config struct {
 
 func main() {
 	logger := jsonlog.New(os.Stdout, jsonlog.LevelInfo)
-	godotenv.Load()
 
 	conf := config{}
 

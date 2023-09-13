@@ -1,0 +1,6 @@
+bin/
+README.md
+Dockerfile*
+requirements.txt
+test_script.py
+venv/
