@@ -7,9 +7,9 @@ COPY go.mod go.sum ./
 
 RUN go mod download
 
-COPY . .
+COPY ./cmd/server/main.go .  # Fixed typo in the source file path
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o cms ./cmd/server/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o cms main.go  # Removed unnecessary directory path
 
 FROM alpine:latest
 
