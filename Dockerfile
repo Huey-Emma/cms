@@ -1,13 +1,18 @@
-FROM golang:1.21.1-alpine
+FROM golang:1.21.1-alpine as build
 
 WORKDIR /app
 
-COPY go.mod go.sum ./
+COPY go.mod go.sum .
 
 RUN go mod download
 
-COPY . .  # Fixed typo in the source file path
+COPY . . 
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o cms main.go  # Removed unnecessary directory path
+RUN CGO_ENABLED=0 GOOS=linux go build -o cms cmd/server/main.go
 
-CMD ["./cmd/server/main.go"]
+FROM scratch
+
+COPY --from=build /app/cms cms
+
+CMD ["/cms"]
+
